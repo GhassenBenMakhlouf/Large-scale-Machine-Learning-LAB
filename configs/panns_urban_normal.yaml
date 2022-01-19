@@ -1,0 +1,60 @@
+seml:
+    executable: setup.py
+    name: panns_urban_normal
+    output_dir: seml_logs
+    project_root_dir: ..
+
+slurm:
+  experiments_per_job: 1
+  sbatch_options:
+    gres: gpu:1
+    mem: 16G
+    cpus-per-task: 2
+    time: 0-12:00
+
+fixed:
+  model:
+    model_type: panns
+    model_params:
+      sample_rate: 32000
+      window_size: 1024
+      hop_size: 320
+      mel_bins: 64
+      fmin: 50
+      fmax: 14000
+      num_classes: 10
+      freeze_base: False
+    pretrain: True
+    pretrain_paths:
+      panns_checkpoint_path: "./pretrained/Wavegram_Logmel_Cnn14_mAP=0.439.pth"
+      talnet_checkpoint_path: "./pretrained/TALNet.pt"
+
+  training:
+    name: panns_urban_normal
+    num_epochs: 500
+    patience: 30
+    print_every: 1
+    validate_every: 1
+    min_epochs: 100
+    update_criterion: loss
+
+  optimization:
+    loss_type: CE
+    optimizer_type: Adam
+    optimizer_params:
+      lr: 3e-4
+      betas: [0.9, 0.999]
+      eps: 1e-08
+      weight_decay: 1e-5
+      amsgrad: True
+
+  data:
+    dataset: urban
+    split: train # for us8k
+    val_percent: 0.2
+    test_percent: 0.2
+    batch_size: 32
+    sample_rate: 32000
+    mimic_bmw: False # for us8k
+    spectr_form: False
+    num_workers: 2

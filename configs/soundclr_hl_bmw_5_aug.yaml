@@ -1,0 +1,67 @@
+seml:
+    executable: setup.py
+    name: soundclr_hl_bmw_5_aug
+    output_dir: seml_logs
+    project_root_dir: ..
+
+slurm:
+  experiments_per_job: 1
+  sbatch_options:
+    gres: gpu:1
+    mem: 16G
+    cpus-per-task: 2
+    time: 0-02:00
+
+fixed:
+  model:
+    model_type: soundCLR
+    model_params:
+      num_classes: 6
+      loss_type: HL
+    pretrain: True
+    pretrain_paths:
+      panns_checkpoint_path: "./pretrained/Wavegram_Logmel_Cnn14_mAP=0.439.pth"
+      talnet_checkpoint_path: "./pretrained/TALNet.pt"
+
+  training:
+    name: soundclr_hl_bmw_5_aug
+    num_epochs: 500
+    patience: 30
+    print_every: 1
+    validate_every: 1
+    min_epochs: 100
+    lr_decay: 0.98
+    alpha: 0.5
+
+  optimization:
+    loss_type: HL
+    optimizer_type: Adam
+    optimizer_params:
+      lr: 0.0001
+      betas: [0.9, 0.999]
+      eps: 0.00000001
+      weight_decay: 0.001
+      amsgrad: True
+
+  data:
+    dataset: bmw
+    val_percent: 0.2
+    test_percent: 0.2
+    batch_size: 64
+    sample_rate: 32000
+    num_workers: 2
+    spectr_form: True
+    window_size: 1024
+    hop_size: 512
+    waveform_aug: True
+    spec_aug: True
+    random_scale: 1.25
+    random_crop_size: 192000
+    n_freq_masks: 2
+    width_freq_masks: 32
+    n_time_masks: 1
+    width_time_masks: 32
+    max_class_samples: 5
+
+  cross_validation:
+    n_folds: 5

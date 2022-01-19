@@ -1,0 +1,58 @@
+seml:
+    executable: setup.py
+    name: local_talnet
+    output_dir: seml_logs
+    project_root_dir: ..
+
+slurm:
+  experiments_per_job: 1
+  sbatch_options:
+    gres: gpu:1
+    mem: 16G
+    cpus-per-task: 2
+    time: 0-02:00
+
+fixed:
+  model:
+    model_type: talnet
+    model_params:
+      num_classes: 6
+      sample_rate: 32000
+      num_mels: 64
+      window_size: 2822
+      hop_size: 1103
+      fmin: 0
+      fmax: 8000
+      spec_aug: True
+    pretrain: True
+    pretrain_paths:
+      panns_checkpoint_path: "./pretrained/Wavegram_Logmel_Cnn14_mAP=0.439.pth"
+      talnet_checkpoint_path: "./pretrained/TALNet.pt"
+
+  training:
+    name: local_talnet
+    num_epochs: 3
+    patience: 30
+    print_every: 1
+    validate_every: 1
+    min_epochs: 3
+
+  optimization:
+    loss_type: CE
+    optimizer_type: Adam
+    optimizer_params:
+      lr: 0.0001
+      betas: [0.9, 0.999]
+      eps: 0.00000001
+      weight_decay: 0.001
+      amsgrad: True
+
+  data:
+    dataset: bmw
+    val_percent: 0.2
+    test_percent: 0.2
+    batch_size: 8
+    sample_rate: 32000
+    spectr_form: False
+    num_workers: 0
+    max_class_samples: 40

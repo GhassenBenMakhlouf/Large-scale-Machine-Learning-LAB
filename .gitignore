@@ -1,0 +1,17 @@
+datasets
+checkpoints
+logs
+venv
+.vscode
+.ipynb_checkpoints
+*.DS_Store
+*__pycache__/
+
+# weigths:
+pretrained/
+*.pt
+*.pth
+
+# seml files:
+*exp_config.yaml
+*experiment.py
