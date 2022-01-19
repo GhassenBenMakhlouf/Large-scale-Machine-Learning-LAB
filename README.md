@@ -5,20 +5,21 @@ Engineers often diagnose broken vehicle components by their sound, e.g. the soun
 
 ## Data
 Real-world dataset from BMW that contains mechanical sounds of vehicle components and publicly available audio data sets.
+<p align="center">
+  <img align="right" src="./images/data_stats.png" alt="drawing" width="28%"/>
+</p>
+
 #### Dataset from BMW
+
 * Real-world Brake noise dataset
 * Contains 1090 samples over 6 classes
 * Unbalanced, small and noisy Dataset  
   => our main Idea: use pretrained models  
   additionally: Cross validation & Data Augmentation
 
-<p align="center">
-  <img src="./images/data_stats.png" alt="drawing" width="50%"/>
-</p>
-
 #### Data Preprocessing
 <p align="center">
-  <img align="right" src="./images/mel.png" alt="drawing" width="50%"/>
+  <img align="right" src="./images/mel.png" alt="drawing" width="25%"/>
 </p>
 
 Original Audio Data (Waveform):
@@ -30,11 +31,11 @@ Output:
 * Image-like!
 
 ## Project Goals
-<p align="center">
-  <img align="right" src="./images/robust.png" alt="drawing" width="50%"/>
-</p>
-* Implement robust classifiers. <p align="center"> <img align="right" src="./images/reduce.png" alt="drawing" width="50%"/> </p>
-* Reduce the number of training samples per class. <p align="center"> <img align="right" src="./images/analyze.png" alt="drawing" width="50%"/> </p>
+<p align="center"> <img align="left" src="./images/robust.jpg" alt="drawing" width="4%"/></p>
+* Implement robust classifiers. 
+<p align="center"> <img align="left" src="./images/reduce.png" alt="drawing" width="4%"/> </p>
+* Reduce the number of training samples per class. 
+<p align="center"> <img align="left" src="./images/analyze.png" alt="drawing" width="4%"/> </p>
 * Analyze and optimize the performance.
 
 ## Used Architectures
