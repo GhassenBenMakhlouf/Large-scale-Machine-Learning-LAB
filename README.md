@@ -31,8 +31,8 @@ Output:
 * Image-like!
 
 #### Data Augmentation Pipeline
-<p align="center"> <img src="./images/aug.jpg" alt="drawing" width="25%"/></p>
-<p align="center"> <img src="./images/aug2.jpg" alt="drawing" width="25%"/></p>
+<p align="center"> <img src="./images/aug.png" alt="drawing" width="50%"/></p>
+<p align="center"> <img src="./images/aug2.png" alt="drawing" width="50%"/></p>
 
 ## Project Goals
 <p align="center"> <img align="left" src="./images/robust.jpg" alt="drawing" width="3%"/></p>
@@ -92,7 +92,7 @@ Output:
 
 ## Results
 <p align="center">
-  <img align="right" src="./images/exp1.png" alt="drawing" width="30%"/>
+  <img align="right" src="./images/exp1.png" alt="drawing" width="50%"/>
 </p>
 
 #### Results on the whole Dataset
@@ -138,15 +138,15 @@ All the results presented in these graphs can be read from these tables:
 <table>
   <tr>
     <td> Test Accuracy </td>
-    <td> <img src="./images/tab1.png" alt="Drawing" width="75%"/> </td>
+    <td> <img align="right" src="./images/tab1.png" alt="Drawing" width="75%"/> </td>
   </tr>
   <tr>
     <td> Top 2 Accuracy </td>
-    <td> <img src="./images/tab2.png" alt="Drawing" width="75%"/> </td>
+    <td> <img align="right" src="./images/tab2.png" alt="Drawing" width="75%"/> </td>
   </tr>
   <tr>
     <td> Top 3 Accuracy </td>
-    <td> <img src="./images/tab3.png" alt="Drawing" width="75%"/> </td>
+    <td> <img align="right" src="./images/tab3.png" alt="Drawing" width="75%"/> </td>
   </tr>
 </table>
 
