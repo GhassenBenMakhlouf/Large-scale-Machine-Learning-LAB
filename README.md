@@ -1,3 +1,6 @@
+<p align="center">
+  <img align="right" src="./images/bmw.png" alt="drawing" width="28%"/>
+</p>
 # Learning for Small Data Sets: Classification of Sound Signals
 
 ## Problem
