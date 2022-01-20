@@ -30,6 +30,10 @@ Output:
 * Frequency Time Plot
 * Image-like!
 
+#### Data Augmentation Pipeline
+<p align="center"> <img src="./images/aug.jpg" alt="drawing" width="25%"/></p>
+<p align="center"> <img src="./images/aug2.jpg" alt="drawing" width="25%"/></p>
+
 ## Project Goals
 <p align="center"> <img align="left" src="./images/robust.jpg" alt="drawing" width="3%"/></p>
 * Implement robust classifiers. 
@@ -43,12 +47,12 @@ Output:
   <img align="right" src="./images/panns.png" alt="drawing" width="30%"/>
 </p>
 
-### PANNs
+#### PANNs
 * Input: both Spectrogram and Waveform
 * Very deep architecture: Two **parallel** branches → Features Maps → Concatenation → Conv block → Classification
 * Fully **pretrained** on the *AudioSet* dataset => achieves current state-of-the-art on AudioSet
 
-### SoundCLR
+#### SoundCLR
 * Input: Spectrogram
 * ResNet50 pretrained on ImageNet
 * Model is trained with a **Hybrid loss**. 
@@ -57,7 +61,7 @@ Output:
   <img src="./images/soundCLR.png" alt="drawing" width="50%"/>
 </p>
 
-### TALNetV3
+#### TALNetV3
 * Input: Spectrogram
 * Dual backbone consisting of:
   * Global feature extractor: **pretrained** on *AudioSet*
@@ -66,12 +70,32 @@ Output:
   <img src="./images/talnet.png" alt="drawing" width="50%"/>
 </p>
 
+## Experiments
+<table>
+  <thead>
+    <tr>
+      <th>Training on the whole BMW data set</th>
+      <th>Training with fewer samples</th>
+    </tr>
+  </thead>
+  <tbody>  
+    <tr>
+      <td> - Train the models without data augmentation </td>
+      <td> - Train with 40, 20, 10 and 5 samples from each class with 5 fold cross validation </td>
+    </tr>
+    <tr>
+      <td> - Train with data augmentation </td>
+      <td> - Train with 40, 20, 10 and 5 samples from each class with data augmentation with 5 fold cross validation </td>
+    </tr>
+  </tbody>
+</table>
+
 ## Results
 <p align="center">
   <img align="right" src="./images/exp1.png" alt="drawing" width="30%"/>
 </p>
 
-### Results on the whole Dataset
+#### Results on the whole Dataset
 First experiments:  
 Training on the whole Dataset with & without Data Augmentation  
 Metric used: Test Accuracy
@@ -81,7 +105,7 @@ Acquiring training samples takes a lot of effort!
 => Next experiments: Investigate model performance on 40/20/10/5 samples **per Class**  
 Metric: additionally Top 2/3 Accuracy
 
-### Results on fewer Samples per Class
+#### Results on fewer Samples per Class
 <table><tr>
 <td> <img align="right" src="./images/plot1.png" alt="Drawing" width="75%"/> </td>
 <td> <img align="left" src="./images/plot2.png" alt="Drawing" width="75%"/> </td>
@@ -110,7 +134,23 @@ PANNs achieves:
 * Over 94.5% Top 3 Accuracy even for 5 samples
 * \>99% Top 3 Accuracy for 40 samples
 
-### Class-wise Accuracies PANNs
+All the results presented in these graphs can be read from these tables:
+<table>
+  <tr>
+    <td> Test Accuracy </td>
+    <td> <img src="./images/tab1.png" alt="Drawing" width="75%"/> </td>
+  </tr>
+  <tr>
+    <td> Top 2 Accuracy </td>
+    <td> <img src="./images/tab2.png" alt="Drawing" width="75%"/> </td>
+  </tr>
+  <tr>
+    <td> Top 3 Accuracy </td>
+    <td> <img src="./images/tab3.png" alt="Drawing" width="75%"/> </td>
+  </tr>
+</table>
+
+#### Class-wise Accuracies PANNs
 
 <table><tr>
 <td> <img align="right" src="./images/plot7.png" alt="Drawing" width="75%"/> </td>
@@ -121,7 +161,13 @@ PANNs achieves:
 * “Schrummknarzen” & “No brake noise” accuracy drops significantly for fewer samples
 * “Scheibenknacken” is the easiest class to learn
 
-### Further Analysis PANNs 40 Samples
+The results presented in the graph can be read from this table:
+
+<p align="center">
+  <img src="./images/tab4.png" alt="drawing" width="75%"/>
+</p>
+
+#### Further Analysis PANNs 40 Samples
 Accuracies only gave us an idea, whether the samples are predicted correctly or not. But we don’t have any idea about the wrongly predicted samples.
 
 Two other metrics were computed:  
@@ -167,6 +213,8 @@ Why?
 * However, the model has problems with the other classes.
 * Worst performance with class Knarzen, with average probability is below 50%.
 
+
+
 ## Summary
 Best Results with PANNs: 
 * 96.6% test accuracy on full BMW dataset.
@@ -180,6 +228,10 @@ Performance with Augmentation depends on architecture:
 * No significant boost for PANNs
 * Accuracy increase for SoundCLR
 
- 
+## References
+1. Kong, Q., Cao, Y., Iqbal, T., Wang, Y., Wang, W., & Plumbley, M. D. (2020). Panns: Large-scale pretrained audio neural networks for audio pattern recognition. IEEE/ACM Transactions on Audio, Speech, and Language Processing, 28, 2880-2894.
+2. Nasiri, A., & Hu, J. (2021). SoundCLR: Contrastive Learning of Representations For Improved Environmental Sound Classification. arXiv preprint arXiv:2103.01929.
+3. Arnault, A., Hanssens, B., & Riche, N. (2020). Urban Sound Classification: striving towards a fair comparison. arXiv preprint arXiv:2010.11805.
+
 
 
