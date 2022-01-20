@@ -31,19 +31,19 @@ Output:
 * Image-like!
 
 ## Project Goals
-<p align="center"> <img align="left" src="./images/robust.jpg" alt="drawing" width="4%"/></p>
+<p align="center"> <img align="left" src="./images/robust.jpg" alt="drawing" width="3%"/></p>
 * Implement robust classifiers. 
-<p align="center"> <img align="left" src="./images/reduce.png" alt="drawing" width="4%"/> </p>
+<p align="center"> <img align="left" src="./images/reduce.png" alt="drawing" width="3%"/> </p>
 * Reduce the number of training samples per class. 
-<p align="center"> <img align="left" src="./images/analyze.png" alt="drawing" width="4%"/> </p>
+<p align="center"> <img align="left" src="./images/analyze.png" alt="drawing" width="3%"/> </p>
 * Analyze and optimize the performance.
 
 ## Used Architectures
-### PANNs
 <p align="center">
-  <img align="right" src="./images/panns.png" alt="drawing" width="50%"/>
+  <img align="right" src="./images/panns.png" alt="drawing" width="30%"/>
 </p>
 
+### PANNs
 * Input: both Spectrogram and Waveform
 * Very deep architecture: Two **parallel** branches → Features Maps → Concatenation → Conv block → Classification
 * Fully **pretrained** on the *AudioSet* dataset => achieves current state-of-the-art on AudioSet
@@ -54,26 +54,27 @@ Output:
 * Model is trained with a **Hybrid loss**. 
 * **Hybrid loss: Weighted sum** of supervised contrastive loss and a cross-entropy loss.
 <p align="center">
-  <img src="./images/soundclr.png" alt="drawing" width="50%"/>
+  <img src="./images/soundCLR.png" alt="drawing" width="50%"/>
 </p>
 
 ### TALNetV3
 * Input: Spectrogram
 * Dual backbone consisting of:
-  * Global feature extractor: **pretrained** on *AudioSet
+  * Global feature extractor: **pretrained** on *AudioSet*
   * Specific feature extractor: **NOT** pretrained
 <p align="center">
   <img src="./images/talnet.png" alt="drawing" width="50%"/>
 </p>
 
 ## Results
+<p align="center">
+  <img align="right" src="./images/exp1.png" alt="drawing" width="30%"/>
+</p>
+
 ### Results on the whole Dataset
 First experiments:  
 Training on the whole Dataset with & without Data Augmentation  
 Metric used: Test Accuracy
-<p align="center">
-  <img align="right" src="./images/exp1.png" alt="drawing" width="50%"/>
-</p>
 
 Acquiring training samples takes a lot of effort!  
 => BMW interested in training with **fewer** samples per Class    
@@ -81,48 +82,40 @@ Acquiring training samples takes a lot of effort!
 Metric: additionally Top 2/3 Accuracy
 
 ### Results on fewer Samples per Class
-<p align="center">
-  <img align="left" src="./images/plot1.png" alt="drawing" width="50%"/>
-</p>
-<p align="center">
-  <img align="right" src="./images/plot2.png" alt="drawing" width="50%"/>
-</p>
+<table><tr>
+<td> <img align="right" src="./images/plot1.png" alt="Drawing" width="75%"/> </td>
+<td> <img align="left" src="./images/plot2.png" alt="Drawing" width="75%"/> </td>
+</tr></table>
 
 * PANNs achieves best results, 93.9% on 40 samples
 * SoundCLR benefits from Augmentation but has problems with fewer samples
 * TALNetV3 performs worse with Augmentation
 
 
-<p align="center">
-  <img align="left" src="./images/plot3.png" alt="drawing" width="50%"/>
-</p>
-<p align="center">
-  <img align="right" src="./images/plot4.png" alt="drawing" width="50%"/>
-</p>
+<table><tr>
+<td> <img align="right" src="./images/plot3.png" alt="Drawing" width="75%"/> </td>
+<td> <img align="left" src="./images/plot4.png" alt="Drawing" width="75%"/> </td>
+</tr></table>
 
 * PANNs achieves over 93% Top 2 Accuracy for > 10 samples
 * SoundCLR still has problems with fewer samples
 
 
-<p align="center">
-  <img align="left" src="./images/plot5.png" alt="drawing" width="50%"/>
-</p>
-<p align="center">
-  <img align="right" src="./images/plot6.png" alt="drawing" width="50%"/>
-</p>
+<table><tr>
+<td> <img align="right" src="./images/plot5.png" alt="Drawing" width="75%"/> </td>
+<td> <img align="left" src="./images/plot6.png" alt="Drawing" width="75%"/> </td>
+</tr></table>
 
 PANNs achieves:
 * Over 94.5% Top 3 Accuracy even for 5 samples
-* > 99% Top 3 Accuracy for 40 samples
+* \>99% Top 3 Accuracy for 40 samples
 
 ### Class-wise Accuracies PANNs
 
-<p align="center">
-  <img align="left" src="./images/plot7.png" alt="drawing" width="70%"/>
-</p>
-<p align="center">
-  <img align="right" src="./images/data_stats.png" alt="drawing" width="30%"/>
-</p>
+<table><tr>
+<td> <img align="right" src="./images/plot7.png" alt="Drawing" width="75%"/> </td>
+<td> <img align="left" src="./images/data_stats.png" alt="Drawing" width="75%"/> </td>
+</tr></table>
 
 * “Hubknarzen” hardest class to learn, always below 90% accuracy
 * “Schrummknarzen” & “No brake noise” accuracy drops significantly for fewer samples
@@ -139,43 +132,35 @@ Why?
 * to analyse further the effect of the number of samples on predicting each class and how confident the model is about its predictions 
 * And to explore similarities between classes
 
-<p align="center">
-  <img align="left" src="./images/plot8.png" alt="drawing" width="50%"/>
-</p>
-<p align="center">
-  <img align="right" src="./images/plot9.png" alt="drawing" width="50%"/>
-</p>
+<table><tr>
+<td> <img align="right" src="./images/plot8.png" alt="Drawing" width="75%"/> </td>
+<td> <img align="left" src="./images/plot9.png" alt="Drawing" width="75%"/> </td>
+</tr></table>
 
 * over 80% confidence for all classes except “Hubknarzen”
 * a confusion between the three first classes. For example, almost 17% of samples of class “Hubknarzen” are predicted as “No Brake Noise”
 
 
-<p align="center">
-  <img align="left" src="./images/plot10.png" alt="drawing" width="50%"/>
-</p>
-<p align="center">
-  <img align="right" src="./images/plot11.png" alt="drawing" width="50%"/>
-</p>
+<table><tr>
+<td> <img align="right" src="./images/plot10.png" alt="Drawing" width="75%"/> </td>
+<td> <img align="left" src="./images/plot11.png" alt="Drawing" width="75%"/> </td>
+</tr></table>
 
 * Here we can again see the drop in class “No brake noise” (confidance under 80%) 
 
-<p align="center">
-  <img align="left" src="./images/plot12.png" alt="drawing" width="50%"/>
-</p>
-<p align="center">
-  <img align="right" src="./images/plot13.png" alt="drawing" width="50%"/>
-</p>
+<table><tr>
+<td> <img align="right" src="./images/plot12.png" alt="Drawing" width="75%"/> </td>
+<td> <img align="left" src="./images/plot13.png" alt="Drawing" width="75%"/> </td>
+</tr></table>
 
 * significant drop in confidence on “Schrummknarzen”
 * overall drop
 
 
-<p align="center">
-  <img align="left" src="./images/plot14.png" alt="drawing" width="50%"/>
-</p>
-<p align="center">
-  <img align="right" src="./images/plot15.png" alt="drawing" width="50%"/>
-</p>
+<table><tr>
+<td> <img align="right" src="./images/plot14.png" alt="Drawing" width="75%"/> </td>
+<td> <img align="left" src="./images/plot15.png" alt="Drawing" width="75%"/> </td>
+</tr></table>
 
 * “Scheibenknacken” (5th class) still almost always predicted correctly => easiest class
 * “Quietschen” (4th class) also with good predictions. 
